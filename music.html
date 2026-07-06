@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practise</title>
+    <style>
+        body{
+            min-height: 100vh;
+            background: radial-gradient(whitesmoke,rebeccapurple);
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h1{
+            color: white;
+            text-align: center;
+            text-shadow: 3px 3px 3px hsl(97, 88%, 9%);
+            font-weight: bold;
+        }
+        #nowplay{
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 3px 3px 5px black;
+            color: white
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(red,white,black);
+            border-radius: 15px;
+            box-shadow: 5px 5px 3px hsl(0, 0%, 0%, 0.7);
+            border: 3px solid black;
+            max-width: 500px;
+            margin: auto;
+        }
+        #nowplay{
+            background-color: hsl(0, 0%, 0%,0.3);
+        }
+        .controlpanel{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        button{
+            display: flex;
+            justify-content: center;
+            color: rgb(126, 123, 123);
+            background: linear-gradient(red,white,black);
+            border-radius: 15px;
+            font-size: 1.5rem;
+            border: 2px solid black;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            cursor: pointer;
+            width: 50px;
+            height: auto;
+            
+        }
+        button:hover{
+            color: black;
+            border: 2px solid black;
+            box-shadow: 2px 2px 2px black;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Javascript Music Player Beginner</h1>
+    <div class="container">
+        
+       <div id="nowplay">Now Playing: -</div>
+       <div class="controlpanel">
+    <button id="play" onclick="play()">▶</button>
+    <button id="pause" onclick="pause()">⏸</button>
+    <button id="stop" onclick="stop()">⏹</button>
+    <button id="previous" onclick="previous()">⏮</button>
+    <button id="next" onclick="next()">⏭</button>
+    <button id="mute" onclick="mute()">🔇</button>
+    <button id="mute" onclick="unmute()">🔊</button>
+       </div>
+
+    </div>
+    <script>
+        const nowplay = document.getElementById("nowplay");
+        const pokemondiamond = new Audio("/music/pokemondiamond.mp3");
+        const pokemonarceus = new Audio("/music/pokemonarceus.mp3");
+        const pokemonsword = new Audio("/music/pokemonsword.mp3");
+        const pokemonviolet = new Audio("/music/pokemonviolet.mp3");
+        const pokemon_home = new Audio("/music/pokemon_home.mp3");
+        const background_music = [pokemondiamond,pokemonarceus,pokemonsword,pokemonviolet,pokemon_home];
+        const background_title = ["Pokemon: Brilliant Diamond & Shinning Pearl",
+                                  "Pokemon Legends: Arceus",
+                                  "Pokemon: Sword & Shield",
+                                  "Pokemon: Scarlet & Violet",
+                                  "Pokemon Home"];
+        let current_Play = 0;
+        background_music[current_Play].volume = 0.2;
+        background_music[current_Play].loop = true;
+
+        function play(){
+            nowplay.textContent = `Now Playing: ${background_title[current_Play]}`;
+            background_music[current_Play].play();
+        }
+        function pause(){
+            background_music[current_Play].pause();
+        }
+        function stop(){
+            pause();
+            background_music[current_Play].currentTime = 0;
+        }
+        function next(){
+            if(current_Play < background_music.length-1){
+                stop();
+                current_Play += 1;
+                nowplay.textContent = `Now Play: ${background_title[current_Play]}`;
+                background_music[current_Play].play();
+            }
+            else{
+                stop();
+                current_Play = 0;
+                nowplay.textContent = `Now Play: ${background_title[current_Play]}`;
+                background_music[current_Play].play();
+            }
+        }
+        function previous(){
+            if(current_Play > 0){
+                stop();
+                current_Play --;
+                nowplay.textContent = `Now Play: ${background_title[current_Play]}`;
+                background_music[current_Play].play();
+            }
+            else{
+                stop();
+                current_Play = background_music.length - 1;
+                nowplay.textContent = `Now Play: ${background_title[current_Play]}`;
+                background_music[current_Play].play();
+            }
+        }
+        function mute(){
+            background_music[current_Play].volume = 0;
+        }
+        function unmute(){
+            background_music[current_Play].volume = 0.2;
+        }
+
+    </script>
+</body>
+</html>
