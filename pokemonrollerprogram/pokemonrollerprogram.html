@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practise</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            background-color: #fff;
+        }
+        #container{
+            background: radial-gradient(whitesmoke,grey);
+            display: flex;
+            flex-wrap: wrap;
+            border: 2px solid;
+            width: 400px;
+            height: 450px;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            border-radius: 20px;
+            padding: 20px;
+            align-items: center;
+        }
+        #pokemon_slot{
+            background: radial-gradient(whitesmoke,yellow);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 320px;
+            height: 200px;
+            border: 3px solid black;
+            gap: 10px;
+            
+        }
+        img{
+            width: 90px;
+            height: auto;
+        }
+        button{
+            border-radius: 20px;
+            font-weight: bold;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        #resultLabel{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-height: 30px;
+        }
+    
+    </style>
+
+</head>
+<body>
+    <div id = "container">
+    
+    <div id = "pokemon_slot">
+        <img src="Bulbasaur.webp">
+        <img src="Squirtle.webp">
+        <img src="Charmander.webp">
+         
+    </div><br>
+    <p id="resultLabel">Roll to win a pokemon!</p>
+    <button onclick = "pokemon_game()">Start Game</button>
+    </div>
+    
+    <script>
+        function pokemon_game(){
+        const pokemon_slot = document.getElementById("pokemon_slot");
+        const resultLabel = document.getElementById("resultLabel");
+        let pokemon = ["Bulbasaur","Squirtle","Charmander"];
+        let random_pokemon = [];
+        let pokemon_images = [];
+
+        
+        for(let i = 0;  i < 3; i++ ){
+            let random = Math.floor(Math.random() * pokemon.length);
+            random_pokemon.push(pokemon[random]);
+            pokemon_images.push(`<img src = "${pokemon[random]}.webp">`);
+        }
+
+        pokemon_slot.innerHTML = pokemon_images.join("");
+        
+        console.log(random_pokemon);
+        if(random_pokemon[0] === random_pokemon[1] && random_pokemon[1] === random_pokemon[2]){
+            console.log("ALL MATCHING YOU WON");
+            resultLabel.textContent = `🎉Congratulation you won a ${random_pokemon[0]}!`;
+            resultLabel.style.color = "green";
+        }
+        else{
+            resultLabel.textContent = `❌Sorry they are not matching!`;
+            resultLabel.style.color = "red";
+        }
+
+        }
+
+    
+
+    </script>
+</body>
+</html>
