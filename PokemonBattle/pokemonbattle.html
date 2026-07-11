@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practise</title>
+    <style>
+        body{
+            background-color: hsl(0, 4%, 28%);
+            color: white;
+            text-shadow: 3px 3px 3px black;
+        }
+        h1{
+            text-align: center;
+        }
+        .container{
+            min-width: 854px;
+            min-height: 644px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            gap: 15px;
+        }
+        #player{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid white;
+            height: 300px;
+            width: 400px;
+        }
+        #computerLabel{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid white;
+            height: 300px;
+            width: 400px;
+        }
+        #resultLabel{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid white;
+            height: 300px;
+            width: 400px;
+        }
+        #player img{
+            width: 90px;
+            height: auto;
+        }
+        #button{
+            padding: 20px;
+            margin: 15px;
+        }
+        #button button{
+            padding: 20px;
+        }
+   
+    </style>
+
+</head>
+<body>
+    <h1>Pokemon Battle Game(Powered by Rock,Papers,Scissors)</h1>
+    <div class="container">
+    <div id ="player">
+        <div id="label">
+        <h4>Please select a pokemon!</h4>
+        </div>
+        <div id ="input">
+        <input type="radio" name="pokemon" id="Bulbasaur">
+        <img src ="Bulbasaur.webp">
+        <input type="radio" name="pokemon" id="Charmander">
+        <img src ="Charmander.webp">
+        <input type="radio" name="pokemon" id="Squirtle">
+        <img src ="Squirtle.webp">
+        </div>
+        <div id ="button">
+        <button onclick="startgame()">Start Game</button>
+        </div>
+    </div>
+    <div id ="computerLabel"></div>
+    <div id ="resultLabel">
+    </div>
+    </div>
+    
+    
+    
+    <script>
+         
+
+        function startgame(){
+
+            const Bulbasaur = document.getElementById("Bulbasaur");
+            const Charmander = document.getElementById("Charmander");
+            const Squirtle = document.getElementById("Squirtle");
+            const computerLabel  = document.getElementById("computerLabel");
+            const resultLabel  = document.getElementById("resultLabel");
+
+            function lost(){
+                resultLabel.textContent = `Sorry but you Lost`;
+                resultLabel.style.color = `red`;
+            }
+
+            function won(){
+                resultLabel.textContent = `Congratualtion You won!`;
+                resultLabel.style.color = `green`;}
+
+            function tie(){
+                resultLabel.textContent = `It's Tie`;
+                resultLabel.style.color = `red`;
+            }
+            
+            let pokemon = ["Bulbasaur","Charmander","Squirtle"];
+            let player = "";
+            let random = Math.floor(Math.random() * pokemon.length);
+            let computer = pokemon[random];
+            
+            
+
+            if(Bulbasaur.checked){
+                player = "Bulbasaur";
+                computerLabel.innerHTML = `<img src="${computer}.webp">`;
+                if(computer === "Charmander"){
+                    lost();
+                }
+                else if(computer === player){
+                    tie();
+                }
+                else{
+                    won();
+                }
+            }
+            else if(Charmander.checked){
+                player = "Charmander";
+                computerLabel.innerHTML = `<img src="${computer}.webp">`;
+                if(computer === "Squirtle"){
+                    lost();
+                }
+                else if(computer === player){
+                    tie();
+                }
+                else{
+                    won();
+                }
+            }
+            else if(Squirtle.checked){
+                player = "Squirtle";
+                computerLabel.innerHTML = `<img src="${computer}.webp">`;
+                 if(computer === "Bulbasaur"){
+                    lost();
+                }
+                else if(computer === player){
+                    tie();
+                }
+                else{
+                    won();
+                }
+            }
+            else{
+                window.alert("Please choose a pokemon!");
+            
+            }
+            
+        }
+        
+    
+
+    </script>
+</body>
+</html>
