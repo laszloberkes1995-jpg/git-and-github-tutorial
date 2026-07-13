@@ -81,7 +81,7 @@
         <img src ="Squirtle.webp">
         </div>
         <div id ="button">
-        <button onclick="startgame()">Start Game</button>
+        <button onclick="startgame(resultLabel)" id="startgamebutton">Start Game</button>
         </div>
     </div>
     <div id ="computerLabel"></div>
@@ -92,29 +92,30 @@
     
     
     <script>
-         
+            function lost(resultLabel){
+                resultLabel.textContent = `Sorry but you Lost`;
+                resultLabel.style.color = `red`;
+            
+            }
 
-        function startgame(){
+            function won(resultLabel){
+                resultLabel.textContent = `Congratualtion You won!`;
+                resultLabel.style.color = `green`;}
+
+            function tie(resultLabel){
+                resultLabel.textContent = `It's Tie`;
+                resultLabel.style.color = `red`;
+            }
+
+        function startgame(resultLabel){
 
             const Bulbasaur = document.getElementById("Bulbasaur");
             const Charmander = document.getElementById("Charmander");
             const Squirtle = document.getElementById("Squirtle");
             const computerLabel  = document.getElementById("computerLabel");
-            const resultLabel  = document.getElementById("resultLabel");
+        
 
-            function lost(){
-                resultLabel.textContent = `Sorry but you Lost`;
-                resultLabel.style.color = `red`;
-            }
-
-            function won(){
-                resultLabel.textContent = `Congratualtion You won!`;
-                resultLabel.style.color = `green`;}
-
-            function tie(){
-                resultLabel.textContent = `It's Tie`;
-                resultLabel.style.color = `red`;
-            }
+         
             
             let pokemon = ["Bulbasaur","Charmander","Squirtle"];
             let player = "";
@@ -127,44 +128,61 @@
                 player = "Bulbasaur";
                 computerLabel.innerHTML = `<img src="${computer}.webp">`;
                 if(computer === "Charmander"){
-                    lost();
+                    lost(resultLabel);
                 }
                 else if(computer === player){
-                    tie();
+                    tie(resultLabel);
                 }
                 else{
-                    won();
+                    won(resultLabel);
                 }
             }
             else if(Charmander.checked){
                 player = "Charmander";
                 computerLabel.innerHTML = `<img src="${computer}.webp">`;
                 if(computer === "Squirtle"){
-                    lost();
+                    lost(resultLabel);
                 }
                 else if(computer === player){
-                    tie();
+                    tie(resultLabel);
                 }
                 else{
-                    won();
+                    won(resultLabel);
                 }
             }
             else if(Squirtle.checked){
                 player = "Squirtle";
                 computerLabel.innerHTML = `<img src="${computer}.webp">`;
                  if(computer === "Bulbasaur"){
-                    lost();
+                    lost(resultLabel);
                 }
                 else if(computer === player){
-                    tie();
+                    tie(resultLabel);
                 }
                 else{
-                    won();
+                    won(resultLabel);
                 }
             }
             else{
                 window.alert("Please choose a pokemon!");
             
+            }
+
+            if(Bulbasaur.checked || Charmander.checked || Squirtle.checked){
+                startgamebutton.disabled = true;
+
+                setTimeout(() => {
+                    computerLabel.innerHTML = "";
+                    resultLabel.textContent = "";
+
+                    Bulbasaur.checked = false;
+                    Charmander.checked = false;
+                    Squirtle.checked = false;
+
+                    startgamebutton.disabled = false;
+                    
+                },5000)
+
             }
             
         }
